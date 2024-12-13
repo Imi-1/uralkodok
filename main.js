@@ -1,3 +1,5 @@
+// A táblázat elemeinek létrehozása során a változók mindig a megfelelő HTML elemet veszik fel, például az oszlopok a col-t.
+
 const table = document.createElement('table'); // Létrehozom a táblázatot
 document.body.appendChild(table); // Hozzáadom a táblázatot az oldal törzséhez
 
