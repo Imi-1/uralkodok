@@ -10,8 +10,8 @@ const array = [
         cell3: "1000" // Az esemény évszáma
     },
     {
-        cell1: "Pannonhalmi apátság megalapítása", // Az esemény neve
-        cell2: "1001" // Az esemény évszáma
+        cell2: "Pannonhalmi apátság megalapítása", // Az esemény neve
+        cell3: "1001" // Az esemény évszáma
     },
     {
         cell1: "IV. Béla", // Az uralkodó neve
@@ -24,8 +24,8 @@ const array = [
         cell3: "1485" // Az esemény évszáma
     },
     {
-        cell1: "Kenyérmezei csata", // Az esemény neve
-        cell2: "1479" // Az esemény évszáma
+        cell2: "Kenyérmezei csata", // Az esemény neve
+        cell3: "1479" // Az esemény évszáma
     },
     {
         cell1: "II. Rákóczi Ferenc", // Az uralkodó neve
@@ -33,8 +33,8 @@ const array = [
         cell3: "1703" // Az esemény évszáma
     },
     {
-        cell1: "A szabadságharc vége", // Az esemény neve
-        cell2: "1711" // Az esemény évszáma
+        cell2: "A szabadságharc vége", // Az esemény neve
+        cell3: "1711" // Az esemény évszáma
     }
 ];
 
@@ -78,98 +78,19 @@ headerRow.appendChild(headerCell3); // Hozzáadom a harmadik cellát a fejléc s
 const tbody = document.createElement('tbody'); // Létrehozom a táblázat törzsét
 table.appendChild(tbody); // Hozzáadom a táblázat törzsét a táblázathoz
 
-const tbodyRow1 = document.createElement('tr'); // Létrehozom az első sort a törzsben
-tbody.appendChild(tbodyRow1); // Hozzáadom az első sort a táblázat törzséhez
+for (let i = 1; i < array.length; i++) { // Iterálunk végig az array elemein, kezdve az index 1-től
+    const row = document.createElement('tr'); // Létrehozunk egy új sort
+    tbody.appendChild(row); // Hozzáadjuk az új sort a tbody-hoz
 
-const tbodyRow1Cell1 = document.createElement('td'); // Létrehozom az első cellát az első sorban
-tbodyRow1Cell1.innerHTML = array[1].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow1.appendChild(tbodyRow1Cell1); // Hozzáadom az első cellát az első sorhoz
-tbodyRow1Cell1.rowSpan = "2"; // Az első cella két sort foglal össze
+    const cell1 = document.createElement('td'); // Létrehozunk egy új cellát az első oszlophoz
+    cell1.innerHTML = array[i].cell1; // Beállítjuk a cella tartalmát az array[i].cell1 értékére
+    row.appendChild(cell1); // Hozzáadjuk az első cellát a sorhoz
 
-const tbodyRow1Cell2 = document.createElement('td'); // Létrehozom a második cellát az első sorban
-tbodyRow1Cell2.innerHTML = array[1].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow1.appendChild(tbodyRow1Cell2); // Hozzáadom a második cellát az első sorhoz
+    const cell2 = document.createElement('td'); // Létrehozunk egy új cellát a második oszlophoz
+    cell2.innerHTML = array[i].cell2; // Beállítjuk a cella tartalmát az array[i].cell2 értékére
+    row.appendChild(cell2); // Hozzáadjuk a második cellát a sorhoz
 
-const tbodyRow1Cell3 = document.createElement('td'); // Létrehozom a harmadik cellát az első sorban
-tbodyRow1Cell3.innerHTML = array[1].cell3; // Beállítom a harmadik cella szövegét a tömb segítségével
-tbodyRow1.appendChild(tbodyRow1Cell3); // Hozzáadom a harmadik cellát az első sorhoz
-
-const tbodyRow2 = document.createElement('tr'); // Létrehozom a második sort a törzsben
-tbody.appendChild(tbodyRow2); // Hozzáadom a második sort a táblázat törzséhez
-
-const tbodyRow2Cell1 = document.createElement('td'); // Létrehozom az első cellát a második sorban
-tbodyRow2Cell1.innerHTML = array[2].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow2.appendChild(tbodyRow2Cell1); // Hozzáadom az első cellát a második sorhoz
-
-const tbodyRow2Cell2 = document.createElement('td'); // Létrehozom a második cellát a második sorban
-tbodyRow2Cell2.innerHTML = array[2].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow2.appendChild(tbodyRow2Cell2); // Hozzáadom a második cellát a második sorhoz
-
-const tbodyRow3 = document.createElement('tr'); // Létrehozom a harmadik sort a törzsben
-tbody.appendChild(tbodyRow3); // Hozzáadom a harmadik sort a táblázat törzséhez
-
-const tbodyRow3Cell1 = document.createElement('td'); // Létrehozom az első cellát a harmadik sorban
-tbodyRow3Cell1.innerHTML = array[3].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow3.appendChild(tbodyRow3Cell1); // Hozzáadom az első cellát a harmadik sorhoz
-
-const tbodyRow3Cell2 = document.createElement('td'); // Létrehozom a második cellát a harmadik sorban
-tbodyRow3Cell2.innerHTML = array[3].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow3.appendChild(tbodyRow3Cell2); // Hozzáadom a második cellát a harmadik sorhoz
-
-const tbodyRow3Cell3 = document.createElement('td'); // Létrehozom a harmadik cellát a harmadik sorban
-tbodyRow3Cell3.innerHTML = array[3].cell3; // Beállítom a harmadik cella szövegét a tömb segítségével
-tbodyRow3.appendChild(tbodyRow3Cell3); // Hozzáadom a harmadik cellát a harmadik sorhoz
-
-const tbodyRow4 = document.createElement('tr'); // Létrehozom a negyedik sort a törzsben
-tbody.appendChild(tbodyRow4); // Hozzáadom a negyedik sort a táblázat törzséhez
-
-const tbodyRow4Cell1 = document.createElement('td'); // Létrehozom az első cellát a negyedik sorban
-tbodyRow4Cell1.innerHTML = array[4].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow4.appendChild(tbodyRow4Cell1); // Hozzáadom az első cellát a negyedik sorhoz
-tbodyRow4Cell1.rowSpan = "2"; // Az első cella két sort foglal össze
-
-const tbodyRow4Cell2 = document.createElement('td'); // Létrehozom a második cellát a negyedik sorban
-tbodyRow4Cell2.innerHTML = array[4].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow4.appendChild(tbodyRow4Cell2); // Hozzáadom a második cellát a negyedik sorhoz
-
-const tbodyRow4Cell3 = document.createElement('td'); // Létrehozom a harmadik cellát a negyedik sorban
-tbodyRow4Cell3.innerHTML = array[4].cell3; // Beállítom a harmadik cella szövegét a tömb segítségével
-tbodyRow4.appendChild(tbodyRow4Cell3); // Hozzáadom a harmadik cellát a negyedik sorhoz
-
-const tbodyRow5 = document.createElement('tr'); // Létrehozom az ötödik sort a törzsben
-tbody.appendChild(tbodyRow5); // Hozzáadom az ötödik sort a táblázat törzséhez
-
-const tbodyRow5Cell1 = document.createElement('td'); // Létrehozom az első cellát az ötödik sorban
-tbodyRow5Cell1.innerHTML = array[5].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow5.appendChild(tbodyRow5Cell1); // Hozzáadom az első cellát az ötödik sorhoz
-
-const tbodyRow5Cell2 = document.createElement('td'); // Létrehozom a második cellát az ötödik sorban
-tbodyRow5Cell2.innerHTML = array[5].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow5.appendChild(tbodyRow5Cell2); // Hozzáadom a második cellát az ötödik sorhoz
-
-const tbodyRow6 = document.createElement('tr'); // Létrehozom a hatodik sort a törzsben
-tbody.appendChild(tbodyRow6); // Hozzáadom a hatodik sort a táblázat törzséhez
-
-const tbodyRow6Cell1 = document.createElement('td'); // Létrehozom az első cellát a hatodik sorban
-tbodyRow6Cell1.innerHTML = array[6].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow6.appendChild(tbodyRow6Cell1); // Hozzáadom az első cellát a hatodik sorhoz
-tbodyRow6Cell1.rowSpan = "2"; // Az első cella két sort foglal össze
-
-const tbodyRow6Cell2 = document.createElement('td'); // Létrehozom a második cellát a hatodik sorban
-tbodyRow6Cell2.innerHTML = array[6].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow6.appendChild(tbodyRow6Cell2); // Hozzáadom a második cellát a hatodik sorhoz
-
-const tbodyRow6Cell3 = document.createElement('td'); // Létrehozom a harmadik cellát a hatodik sorban
-tbodyRow6Cell3.innerHTML = array[6].cell3; // Beállítom a harmadik cella szövegét a tömb segítségével
-tbodyRow6.appendChild(tbodyRow6Cell3); // Hozzáadom a harmadik cellát a hatodik sorhoz
-
-const tbodyRow7 = document.createElement('tr'); // Létrehozom a hetedik sort a törzsben
-tbody.appendChild(tbodyRow7); // Hozzáadom a hetedik sort a táblázat törzséhez
-
-const tbodyRow7Cell1 = document.createElement('td'); // Létrehozom az első cellát a hetedik sorban
-tbodyRow7Cell1.innerHTML = array[7].cell1; // Beállítom az első cella szövegét a tömb segítségével
-tbodyRow7.appendChild(tbodyRow7Cell1); // Hozzáadom az első cellát a hetedik sorhoz
-
-const tbodyRow7Cell2 = document.createElement('td'); // Létrehozom a második cellát a hetedik sorban
-tbodyRow7Cell2.innerHTML = array[7].cell2; // Beállítom a második cella szövegét a tömb segítségével
-tbodyRow7.appendChild(tbodyRow7Cell2); // Hozzáadom a második cellát a hetedik sorhoz
+    const cell3 = document.createElement('td'); // Létrehozunk egy új cellát a harmadik oszlophoz
+    cell3.innerHTML = array[i].cell3; // Beállítjuk a cella tartalmát az array[i].cell3 értékére
+    row.appendChild(cell3); // Hozzáadjuk a harmadik cellát a sorhoz
+}
