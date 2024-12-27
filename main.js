@@ -82,9 +82,19 @@ for (let i = 1; i < array.length; i++) { // Iterálunk végig az array elemein, 
     const row = document.createElement('tr'); // Létrehozunk egy új sort
     tbody.appendChild(row); // Hozzáadjuk az új sort a tbody-hoz
 
-    const cell1 = document.createElement('td'); // Létrehozunk egy új cellát az első oszlophoz
-    cell1.innerHTML = array[i].cell1; // Beállítjuk a cella tartalmát az array[i].cell1 értékére
-    row.appendChild(cell1); // Hozzáadjuk az első cellát a sorhoz
+    if(array[i].cell1 !== undefined){ //Megnézi, hogy a cell1-nek van-e értéke
+        const cell1 = document.createElement('td'); // Létrehozunk egy új cellát az első oszlophoz
+        cell1.innerHTML = array[i].cell1; // Beállítjuk a cella tartalmát az array[i].cell1 értékére
+        row.appendChild(cell1); // Hozzáadjuk az első cellát a sorhoz
+
+        if (array[i+1].cell1 == undefined){ //Megnézi, hogy a következő cell1-nek van-e értéke
+            cell1.rowSpan=2;//Nem volt értéke, ezért a cell1 rowspan 2-t kap
+        }
+        else if(array[i+1].cell1 !== undefined){//Megnézi, hogy a következő cell1-nek van-e értéke
+            cell1.rowSpan=1;//Volt értéke, ezért a cella1 rowspan 1-et kap
+    
+        }
+    }
 
     const cell2 = document.createElement('td'); // Létrehozunk egy új cellát a második oszlophoz
     cell2.innerHTML = array[i].cell2; // Beállítjuk a cella tartalmát az array[i].cell2 értékére
