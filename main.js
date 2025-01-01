@@ -116,6 +116,13 @@ const form = document.getElementById('form'); // A form elemet kérjük le az ID
 form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submit eseményre
     e.preventDefault(); // Megakadályozzuk az alapértelmezett form beküldését
 
+    const thisForm = e.currentTarget; // Az esemény által kiváltott formot eltároljuk egy változóban.
+    const errorElements = thisForm.querySelectorAll('.error'); // Lekérjük az összes elemet, amely rendelkezik "error" osztállyal.
+    for (const i of errorElements) { // Iterálunk az "error" osztályú elemek felett.
+        i.innerHTML = ""; // Kitöröljük ezek tartalmát.
+    }
+    let valid = true; // Kezdőértékként igazra állítjuk a validációs változót.
+
     const cell1HtmlElement = document.getElementById('uralkodo_nev'); // Az uralkodó nevének input mezőjét kérjük le
     const cell2HtmlElement = document.getElementById('esemeny1'); // Az első esemény input mezőjét kérjük le
     const cell3HtmlElement = document.getElementById('evszam1'); // Az első évszám input mezőjét kérjük le
@@ -129,15 +136,43 @@ form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submi
     const cella2Value = cella2HtmlElement.value === '' ? undefined : cella2HtmlElement.value; // Ha a második esemény üres, akkor undefined, különben eltároljuk az értékét
     const cella3Value = cella3HtmlElement.value === '' ? undefined : cella3HtmlElement.value; // Ha a második évszám üres, akkor undefined, különben eltároljuk az értékét
 
-    const newElement = { // Új objektumot hozunk létre az adatokkal
-        cell1: cell1Value, // Az uralkodó neve
-        cell2: cell2Value, // Az első esemény
-        cell3: cell3Value, // Az első évszám
-        cella2: cella2Value, // A második esemény
-        cella3: cella3Value // A második évszám
-    };
+
+    
+    if(cell1Value === "") { // Ellenőrizzük, hogy az uralkodó input mezője üres-e
+        const parentElement = cell1HtmlElement.parentElement; // Megkeressük az uralkodó input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az uralkodó mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = "Kötelező megadni az uralkodót!"; // Beállítjuk a hibaüzenetet
+        valid = false; // A valid változó értékét hamisra állítjuk
+    }
+
+    if(cell2Value === "") { // Ellenőrizzük, hogy az esemény input mezője üres-e
+        const parentElement = cell2HtmlElement.parentElement; // Megkeressük az esemény input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az esemény mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = "Kötelező megadni az eseményt!"; // Beállítjuk a hibaüzenetet
+        valid = false; // A valid változó értékét hamisra állítjuk
+    }
+
+    if(cell3Value === "") { // Ellenőrizzük, hogy az évszám input mezője üres-e
+        const parentElement = cell3HtmlElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = "Kötelező megadni az évszámot!"; // Beállítjuk a hibaüzenetet
+        valid = false; // A valid változó értékét hamisra állítjuk
+    }
+
+
+    if(valid){
+        const newElement = { // Új objektumot hozunk létre az adatokkal
+            cell1: cell1Value, // Az uralkodó neve
+            cell2: cell2Value, // Az első esemény
+            cell3: cell3Value, // Az első évszám
+            cella2: cella2Value, // A második esemény
+            cella3: cella3Value // A második évszám
+        };
+    }
     array.push(newElement); // Az új objektumot hozzáadjuk az array-hez
     
     tbody.innerHTML = ''; // Töröljük a táblázat jelenlegi tartalmát
     renderTable(); // Frissítjük a táblázatot az új adatokkal
+
+    thisForm.reset(); // A form mezőinek alaphelyzetbe állítása
 });
