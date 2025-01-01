@@ -7,11 +7,9 @@ const array = [
     {
         cell1: "I.István", // Az uralkodó neve
         cell2: "Koronázás", // Az esemény neve
-        cell3: "1000" // Az esemény évszáma
-    },
-    {
-        cell2: "Pannonhalmi apátság megalapítása", // Az esemény neve
-        cell3: "1001" // Az esemény évszáma
+        cell3: "1000", // Az esemény évszáma
+        cella2: "Pannonhalmi apátság megalapítása", // Az esemény neve
+        cella3: "1001" // Az esemény évszáma
     },
     {
         cell1: "IV. Béla", // Az uralkodó neve
@@ -21,21 +19,17 @@ const array = [
     {
         cell1: "Mátyás Király", // Az uralkodó neve
         cell2: "Bécs elfoglalása", // Az esemény neve
-        cell3: "1485" // Az esemény évszáma
-    },
-    {
-        cell2: "Kenyérmezei csata", // Az esemény neve
-        cell3: "1479" // Az esemény évszáma
+        cell3: "1485", // Az esemény évszáma
+        cella2: "Kenyérmezei csata", // Az esemény neve
+        cella3: "1479" // Az esemény évszáma
     },
     {
         cell1: "II. Rákóczi Ferenc", // Az uralkodó neve
         cell2: "A szabadságharc kezdete", // Az esemény neve
-        cell3: "1703" // Az esemény évszáma
+        cell3: "1703", // Az esemény évszáma
+        cella2: "A szabadságharc vége", // Az esemény neve
+        cella3: "1711" // Az esemény évszáma
     },
-    {
-        cell2: "A szabadságharc vége", // Az esemény neve
-        cell3: "1711" // Az esemény évszáma
-    }
 ];
 
 // A táblázat elemeinek létrehozása során a változók mindig a megfelelő HTML elemet veszik fel, például az oszlopok a col-t.
@@ -81,31 +75,69 @@ table.appendChild(tbody); // Hozzáadom a táblázat törzsét a táblázathoz
 
 function renderTable(){//Függvény létrehozása
     for (let i = 1; i < array.length; i++) { // Iterálunk végig az array elemein, kezdve az index 1-től
-        const row = document.createElement('tr'); // Létrehozunk egy új sort
-        tbody.appendChild(row); // Hozzáadjuk az új sort a tbody-hoz
+        const row1 = document.createElement('tr'); // Létrehozunk egy új sort
+        tbody.appendChild(row1); // Hozzáadjuk az új sort a tbody-hoz
     
-        if(array[i].cell1 !== undefined){ //Megnézi, hogy a cell1-nek van-e értéke
-            const cell1 = document.createElement('td'); // Létrehozunk egy új cellát az első oszlophoz
-            cell1.innerHTML = array[i].cell1; // Beállítjuk a cella tartalmát az array[i].cell1 értékére
-            row.appendChild(cell1); // Hozzáadjuk az első cellát a sorhoz
-    
-            if (array[i+1].cell1 == undefined){ //Megnézi, hogy a következő cell1-nek van-e értéke
-                cell1.rowSpan=2;//Nem volt értéke, ezért a cell1 rowspan 2-t kap
-            }
-            else if(array[i+1].cell1 !== undefined){//Megnézi, hogy a következő cell1-nek van-e értéke
-                cell1.rowSpan=1;//Volt értéke, ezért a cella1 rowspan 1-et kap
-        
-            }
-        }
-    
+        const cell1 = document.createElement('td'); // Létrehozunk egy új cellát az első oszlophoz
+        cell1.innerHTML = array[i].cell1; // Beállítjuk a cella tartalmát az array[i].cell1 értékére
+        row1.appendChild(cell1); // Hozzáadjuk az első cellát a sorhoz
+
         const cell2 = document.createElement('td'); // Létrehozunk egy új cellát a második oszlophoz
         cell2.innerHTML = array[i].cell2; // Beállítjuk a cella tartalmát az array[i].cell2 értékére
-        row.appendChild(cell2); // Hozzáadjuk a második cellát a sorhoz
+        row1.appendChild(cell2); // Hozzáadjuk a második cellát a sorhoz
     
         const cell3 = document.createElement('td'); // Létrehozunk egy új cellát a harmadik oszlophoz
         cell3.innerHTML = array[i].cell3; // Beállítjuk a cella tartalmát az array[i].cell3 értékére
-        row.appendChild(cell3); // Hozzáadjuk a harmadik cellát a sorhoz
+        row1.appendChild(cell3); // Hozzáadjuk a harmadik cellát a sorhoz
+
+        if (array[i].cella2 !== undefined || array[i].cella3 !== undefined){ // Megnézzük, hogy a cella2 vagy cella3 undefiened-e
+
+            cell1.rowSpan = "2"; // Rowspant adunk a cell1-nek
+
+            const row2 = document.createElement('tr'); // Létrehozunk egy új sort
+            tbody.appendChild(row2); // Hozzáadjuk az új sort a tbody-hoz
+
+            const cella2 = document.createElement('td'); // Létrehozunk egy új cellát a harmadik oszlophoz
+            cella2.innerHTML = array[i].cella2; // Beállítjuk a cella tartalmát az array[i].cella2 értékére
+            row2.appendChild(cella2); // Hozzáadjuk a harmadik cellát a sorhoz
+
+            const cella3 = document.createElement('td'); // Létrehozunk egy új cellát a harmadik oszlophoz
+            cella3.innerHTML = array[i].cella3; // Beállítjuk a cella tartalmát az array[i].cella3 értékére
+            row2.appendChild(cella3); // Hozzáadjuk a harmadik cellát a sorhoz
+        }
     }
+    
 }
 
 renderTable()//Függvény meghívása
+
+
+const form = document.getElementById('form'); // A form elemet kérjük le az ID alapján
+form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submit eseményre
+    e.preventDefault(); // Megakadályozzuk az alapértelmezett form beküldését
+
+    const cell1HtmlElement = document.getElementById('uralkodo_nev'); // Az uralkodó nevének input mezőjét kérjük le
+    const cell2HtmlElement = document.getElementById('esemeny1'); // Az első esemény input mezőjét kérjük le
+    const cell3HtmlElement = document.getElementById('evszam1'); // Az első évszám input mezőjét kérjük le
+    const cella2HtmlElement = document.getElementById('esemeny2'); // A második esemény input mezőjét kérjük le
+    const cella3HtmlElement = document.getElementById('evszam2'); // A második évszám input mezőjét kérjük le
+
+    const cell1Value = cell1HtmlElement.value; // Az uralkodó nevének értékét eltároljuk
+    const cell2Value = cell2HtmlElement.value; // Az első esemény értékét eltároljuk
+    const cell3Value = cell3HtmlElement.value; // Az első évszám értékét eltároljuk
+
+    const cella2Value = cella2HtmlElement.value === '' ? undefined : cella2HtmlElement.value; // Ha a második esemény üres, akkor undefined, különben eltároljuk az értékét
+    const cella3Value = cella3HtmlElement.value === '' ? undefined : cella3HtmlElement.value; // Ha a második évszám üres, akkor undefined, különben eltároljuk az értékét
+
+    const newElement = { // Új objektumot hozunk létre az adatokkal
+        cell1: cell1Value, // Az uralkodó neve
+        cell2: cell2Value, // Az első esemény
+        cell3: cell3Value, // Az első évszám
+        cella2: cella2Value, // A második esemény
+        cella3: cella3Value // A második évszám
+    };
+    array.push(newElement); // Az új objektumot hozzáadjuk az array-hez
+    
+    tbody.innerHTML = ''; // Töröljük a táblázat jelenlegi tartalmát
+    renderTable(); // Frissítjük a táblázatot az új adatokkal
+});
