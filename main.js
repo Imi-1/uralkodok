@@ -151,6 +151,27 @@ form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submi
     };
 
 
+    if(cella2Value===undefined && cella3Value!==undefined){
+
+        const parentElement = cella2HtmlElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = "Minden eseményhez kell tartoznia évszámnak"; // Beállítjuk a hibaüzenetet
+        valid = false; // A valid változó értékét hamisra állítjuk
+    }
+    
+    if(cella2Value!==undefined && cella3Value===undefined){
+
+        const parentElement = cella3HtmlElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = "Minden eseményhez kell tartoznia évszámnak"; // Beállítjuk a hibaüzenetet
+        valid = false; // A valid változó értékét hamisra állítjuk
+    }
+
+
+
+
+
+
     if(valid){
         const newElement = { // Új objektumot hozunk létre az adatokkal
             cell1: cell1Value, // Az uralkodó neve
