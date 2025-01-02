@@ -150,26 +150,9 @@ form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submi
         valid = false; // Amennyiben false volt a valid értékét false-ra állítja
     };
 
-
-    if(cella2Value===undefined && cella3Value!==undefined){
-
-        const parentElement = cella2HtmlElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
-        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
-        error.innerHTML = "Minden eseményhez kell tartoznia évszámnak"; // Beállítjuk a hibaüzenetet
-        valid = false; // A valid változó értékét hamisra állítjuk
+    if(!validateFormInputFieldsExtra(cella2HtmlElement, cella3HtmlElement, "Minden eseményhez kell tartoznia évszámnak")){ //Megnézi, hogy a validateFormInputFieldsExtra false-e
+        valid=false // Amennyiben false volt a valid értékét false-ra állítja;
     }
-    
-    if(cella2Value!==undefined && cella3Value===undefined){
-
-        const parentElement = cella3HtmlElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
-        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
-        error.innerHTML = "Minden eseményhez kell tartoznia évszámnak"; // Beállítjuk a hibaüzenetet
-        valid = false; // A valid változó értékét hamisra állítjuk
-    }
-
-
-
-
 
 
     if(valid){
@@ -196,6 +179,26 @@ function validateFormInputFields(inputElement, errormessage){ // Függvény lét
     let validation = true; // Kezdőértékként igazra állítjuk a validációs változót
     if(inputElement.value === ""){ // Ellenőrizzük, hogy az uralkodó input mezője üres-e
         const parentElement = inputElement.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = errormessage; // Beállítjuk a hibaüzenetet
+        validation = false; // A valid változó értékét hamisra állítjuk
+    }
+    return validation;  //Vissaztér a validation értékével, ami igaz vagy hamis lehet
+}
+
+
+function validateFormInputFieldsExtra(inputElement1, inputElement2, errormessage){ // Függvény létrehozésa három bemeneti értékkel
+    let validation = true; // Kezdőértékként igazra állítjuk a validációs változót
+    if(inputElement1.value==="" && inputElement2.value!==""){ // Ellenőrizzük, hogy az inputElement1 értéke üres és az inputElement2 értéke nem
+        const parentElement = inputElement1.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
+        const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
+        error.innerHTML = errormessage; // Beállítjuk a hibaüzenetet
+        validation = false; // A valid változó értékét hamisra állítjuk
+    }
+
+    if(inputElement1.value!=="" && inputElement2.value===""){// Ellenőrizzük, hogy az inputElement2 értéke üres és az inputElement1 értéke nem
+
+        const parentElement = inputElement2.parentElement; // Megkeressük az évszám input mezőjének szülőelemét
         const error = parentElement.querySelector('.error'); // Az évszám mező szülőelemében keresünk egy "error" osztályú elemet
         error.innerHTML = errormessage; // Beállítjuk a hibaüzenetet
         validation = false; // A valid változó értékét hamisra állítjuk
