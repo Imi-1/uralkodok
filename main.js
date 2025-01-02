@@ -37,40 +37,40 @@ const array = [
 const table = document.createElement('table'); // Létrehozom a táblázatot
 document.body.appendChild(table); // Hozzáadom a táblázatot az oldal törzséhez
 
-const colgroup = document.createElement('colgroup'); // Létrehozom az oszlopcsoportot
-table.appendChild(colgroup); // Az oszlopcsoportot hozzáadom a táblázathoz
-
-const col1 = document.createElement('col'); // Létrehozom az első oszlopot
-col1.className = "colored-column"; // Osztályt adok az első oszlopnak
-colgroup.appendChild(col1); // Hozzáadom az első oszlopot az oszlopcsoporthoz
-
-const col2 = document.createElement('col'); // Létrehozom a második oszlopot
-colgroup.appendChild(col2); // Hozzáadom a második oszlopot az oszlopcsoporthoz
-
-const col3 = document.createElement('col'); // Létrehozom a harmadik oszlopot
-col3.className = "colored-column"; // Osztályt adok a harmadik oszlopnak
-colgroup.appendChild(col3); // Hozzáadom a harmadik oszlopot az oszlopcsoporthoz
-
-const thead = document.createElement('thead'); // Létrehozom a táblázat fejlécét
-table.appendChild(thead); // Hozzáadom a fejlécet a táblázathoz
-
-const headerRow = document.createElement('tr'); // Létrehozok egy sort a fejléc számára
-thead.appendChild(headerRow); // Hozzáadom a sort a táblázat fejlécéhez
-
-const headerCell = document.createElement('th'); // Létrehozom az első cellát a fejlécben
-headerCell.innerHTML = array[0].cell1; // Beállítom az első cella szövegét a tömb segítségével
-headerRow.appendChild(headerCell); // Hozzáadom az első cellát a fejléc sorához
-
-const headerCell2 = document.createElement('th'); // Létrehozom a második cellát a fejlécben
-headerCell2.innerHTML = array[0].cell2; // Beállítom a második cella szövegét a tömb segítségével
-headerRow.appendChild(headerCell2); // Hozzáadom a második cellát a fejléc sorához
-
-const headerCell3 = document.createElement('th'); // Létrehozom a harmadik cellát a fejlécben
-headerCell3.innerHTML = array[0].cell3; // Beállítom a harmadik cella szövegét a tömb segítségével
-headerRow.appendChild(headerCell3); // Hozzáadom a harmadik cellát a fejléc sorához
-
 const tbody = document.createElement('tbody'); // Létrehozom a táblázat törzsét
 table.appendChild(tbody); // Hozzáadom a táblázat törzsét a táblázathoz
+
+
+function createHeader(){
+
+    const colgroup = document.createElement('colgroup'); // Létrehozom az oszlopcsoportot
+    table.appendChild(colgroup); // Az oszlopcsoportot hozzáadom a táblázathoz
+
+    const col1 = document.createElement('col'); // Létrehozom az első oszlopot
+    col1.className = "colored-column"; // Osztályt adok az első oszlopnak
+    colgroup.appendChild(col1); // Hozzáadom az első oszlopot az oszlopcsoporthoz
+
+    const col2 = document.createElement('col'); // Létrehozom a második oszlopot
+    colgroup.appendChild(col2); // Hozzáadom a második oszlopot az oszlopcsoporthoz
+
+    const col3 = document.createElement('col'); // Létrehozom a harmadik oszlopot
+    col3.className = "colored-column"; // Osztályt adok a harmadik oszlopnak
+    colgroup.appendChild(col3); // Hozzáadom a harmadik oszlopot az oszlopcsoporthoz
+
+    const thead = document.createElement('thead'); // Létrehozom a táblázat fejlécét
+    table.appendChild(thead); // Hozzáadom a fejlécet a táblázathoz
+
+    const headerRow = document.createElement('tr'); // Létrehozok egy sort a fejléc számára
+    thead.appendChild(headerRow); // Hozzáadom a sort a táblázat fejlécéhez
+
+    for(const i of Object.values(array[0])){ // Végigmegy az array első objektumán ami tartalmazza a fejléc elemeit
+        const headerCell = document.createElement('th'); // Létrehozom a cellát a fejlécben
+        headerCell.innerHTML = i; // Beállítom a cella szövegét a tömb segítségével
+        headerRow.appendChild(headerCell); // Hozzáadom a cellát a fejléc sorához
+    }
+}
+
+createHeader(); // Függvény meghívása
 
 
 function renderTable(){//Függvény létrehozása
