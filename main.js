@@ -73,7 +73,7 @@ function createHeader(){
 createHeader(); // Függvény meghívása
 
 
-function renderTable(){//Függvény létrehozása
+function renderTable(array){//Függvény létrehozása
     for (let i = 1; i < array.length; i++) { // Iterálunk végig az array elemein, kezdve az index 1-től
         const row1 = document.createElement('tr'); // Létrehozunk egy új sort
         tbody.appendChild(row1); // Hozzáadjuk az új sort a tbody-hoz
@@ -109,7 +109,7 @@ function renderTable(){//Függvény létrehozása
     
 }
 
-renderTable()//Függvény meghívása
+renderTable(array)//Függvény meghívása
 
 
 const form = document.getElementById('form'); // A form elemet kérjük le az ID alapján
@@ -167,7 +167,7 @@ form.addEventListener('submit', function(e) { // Eseményfigyelőt adunk a submi
         array.push(newElement); // Az új objektumot hozzáadjuk az array-hez
     
         tbody.innerHTML = ''; // Töröljük a táblázat jelenlegi tartalmát
-        renderTable(); // Frissítjük a táblázatot az új adatokkal
+        renderTable(array); // Frissítjük a táblázatot az új adatokkal
     
         thisForm.reset(); // A form mezőinek alaphelyzetbe állítása
     }
